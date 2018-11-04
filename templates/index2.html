@@ -168,10 +168,13 @@
       });
       return vars;
     }
-    const address = getUrlVars['address']
-    console.log(address)
     console.log('{{geocode[0]}}')
     console.log('{{geocode[1]}}')
+    console.log(typeof '{{closest}}');
+    var arr_from_json = JSON.parse('{{closest}}');
+    console.log(arr_from_json)
+    // console.log('{{closest['_type']}}')
+    // console.log('{{closest['_location']}}')
     // var loc = '{{loc}}'
     // <!-- console.log({{loc}}) -->
     // console.log(lat)

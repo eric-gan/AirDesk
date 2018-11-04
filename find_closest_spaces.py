@@ -1,6 +1,9 @@
 from pymongo import MongoClient
 from math import sin, cos, sqrt, atan2, radians
 import googlemaps
+import json
+from bson import Binary, Code
+from bson.json_util import dumps
 
 # setup
 gmaps = googlemaps.Client(key='AIzaSyB0mxT2fWkC1tsdGcxD5_rWpLxPsHoKEVQ')
@@ -65,8 +68,8 @@ def find_closest(loc=None):
     distances = []
     for space in listings:
         distance = calc_distance(user_loc, space)
-        distances.append((space['_id'], distance))
+        distances.append((space, distance))
 
     distances = sorted(distances, key=lambda k: k[1])
-    spaces = [loc[0] for loc in distances]
+    spaces = [dumps(loc[0]) for loc in distances]
     return spaces

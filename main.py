@@ -18,6 +18,8 @@ def explore():  # pragma: no cover #this loads index.html as the primary web pag
 	print(loc)
 	dic = get_user_location(loc)
 	geocode = dic['lat'], dic['lng']
+	closest = find_closest(loc)
+	print(closest)
 	# jsonLoc = json.dumps(dic)
 	# if jsonLoc:
 	# 	lat = jsonLoc['lat']
@@ -25,7 +27,7 @@ def explore():  # pragma: no cover #this loads index.html as the primary web pag
 	# else:
 	# 	lat = 37.9
 	# 	lng = 122.3
-	return render_template('index2.html', geocode=geocode)
+	return render_template('index2.html', geocode=geocode, closest=closest)
 	# return render_template('index2.html', loc=jsonLoc)
 	# return render_template('index2.html', lat=lat, lng=lng)
 
