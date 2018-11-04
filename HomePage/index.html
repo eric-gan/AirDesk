@@ -59,7 +59,9 @@
           </div>
           <div class="col-lg-8 mx-auto">
             <p class="text-faded mb-5">Connecting you to Berkeley's finest study hubs</p>
-            <a class="btn btn-primary btn-xl js-scroll-trigger" href="index2.html">Find Out More</a>
+            <form method = "POST">
+              <a class="btn btn-primary btn-xl js-scroll-trigger" href="{{ url_for('search') }}">Find Out More</a>
+            </form>
 
           </div>
         </div>

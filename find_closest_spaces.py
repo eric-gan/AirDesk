@@ -44,19 +44,21 @@ def calc_distance(user_loc, space):
     return distance
 
 
-user_loc = get_user_location(
-    '1600 Amphitheatre Parkway, Mountain View, CA')  # change me later
+def find_closest(loc):
+    print('loc')
+    user_loc = get_user_location(loc)  # change me later
 
-# read database
-db = client.airdesk
-collection = db.listings
-listings = collection.find()
+    # read database
+    db = client.airdesk
+    collection = db.listings
+    listings = collection.find()
 
-# find the closest spaces to user location
-distances = []
-for space in listings:
-    distance = calc_distance(user_loc, space)
-    distances.append((space['_id'], distance))
+    # find the closest spaces to user location
+    distances = []
+    for space in listings:
+        distance = calc_distance(user_loc, space)
+        distances.append((space['_id'], distance))
 
-distances = sorted(distances, key=lambda k: k[1])
-spaces = [loc[0] for loc in distances]
+    distances = sorted(distances, key=lambda k: k[1])
+    spaces = [loc[0] for loc in distances]
+    return spaces
