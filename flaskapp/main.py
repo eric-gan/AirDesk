@@ -1,6 +1,7 @@
 
 from flask import Flask, render_template #imports flask and flask CORS (this allows us to make our
 from flask_cors import CORS #server)
+from ../find_closest_spaces.py import get_user_location
 app = Flask(__name__) #initializes the app
 
 CORS(app) #allows cross-origin sharing (meaning anyone can send requests to the app)
@@ -11,7 +12,11 @@ def index():  # pragma: no cover #this loads index.html as the primary web page
 
 @app.route('/explore', methods=['GET'])
 def explore():  # pragma: no cover #this loads index.html as the primary web page
+	loc = request.args.get('address', default = '', type = str)
+	dic = get_user_location(loc)
     return render_template('index2.html')
+
+
 # @app.route('/counter', methods=['GET']) #this creates a route called /counter that we can reference in the front end called /counter and makes it a get method
 # def get_counter(): #this function returns counter as a string
 #         global counter
