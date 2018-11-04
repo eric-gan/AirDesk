@@ -15,7 +15,6 @@ def index():  # pragma: no cover #this loads index.html as the primary web page
 @app.route('/explore', methods=['GET'])
 def explore():  # pragma: no cover #this loads index.html as the primary web page
 	loc = request.args.get('address', default = '', type = str)
-	print(loc)
 	dic = get_user_location(loc)
 	geocode = dic['lat'], dic['lng']
 	closest = find_closest(loc)
@@ -31,11 +30,9 @@ def explore():  # pragma: no cover #this loads index.html as the primary web pag
 	# return render_template('index2.html', loc=jsonLoc)
 	# return render_template('index2.html', lat=lat, lng=lng)
 
-# @app.route('/search/', methods=['POST'])
-# def search_requested():
-#     search_input = request.form['search']
-#     search_result = find_closest(search_input)
-#     return results(queries=search_result)
+@app.route('/newspace', methods=['GET'])
+def addspace():  # pragma: no cover #this loads index.html as the primary web page
+    return render_template('addspace.html')
 
 if __name__ == "__main__":
     app.run(debug=True)
