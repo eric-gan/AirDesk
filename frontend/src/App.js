@@ -3,9 +3,11 @@ import './App.css';
 import Heading from './Heading';
 import AllListings from './AllListings';
 
-class App extends Component {
 
+class App extends Component {
+    
   render() {
+    
     return (
       <div className="App">
         <Heading/>

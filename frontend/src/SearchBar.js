@@ -1,7 +1,5 @@
-import React from 'react';
-
 const SearchBar = () => {
-    return <input />
+    return (
+        <div> <input/> </div>
+    )
 }
-
-export default SearchBar;
