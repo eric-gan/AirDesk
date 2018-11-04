@@ -21,51 +21,20 @@ def get_user_location(loc):
     location = geocode_result[0]['geometry']['location']
     return location
 
-def lat_lon_dist(lat1, lat2, lon1, lon2):
-    """
-    Returns the distance between two longitude and latitude coordinates
-    
-    param lat1, lat2, lon1, lon2: The two longitude and latitude coordinates.
-    type loc: double
-
-    rval: The distance between the locations.
-    rtype: double
-    """
-    # approximate radius of earth in km
-    R = 6373.0
-
-    lat1 = radians(lat1)
-    lon1 = radians(lon1)
-    lat2 = radians(lat2)
-    lon2 = radians(lon2)
-
-    dlon = lon2 - lon1
-    dlat = lat2 - lat1
-
-    a = sin(dlat / 2)**2 + cos(lat1) * cos(lat2) * sin(dlon / 2)**2
-    c = 2 * atan2(sqrt(a), sqrt(1 - a))
-
-    distance = R * c
-    return distance
-
 user_loc = get_user_location('1600 Amphitheatre Parkway, Mountain View, CA') # change me later
 
 db = client.airdesk
 collection = db.listings
 listings = collection.find()
 
-locations = []
+distances = []
 for space in listings:
     geocode_result = gmaps.geocode(space['_location'])
-    locations.append(geocode_result[0]['geometry']['location'])
+    dest_loc = geocode_result[0]['geometry']['location']
+    direction = gmaps.distance_matrix(user_loc, dest_loc, mode="walking")
+    distance = direction['rows'][0]['elements'][0]['distance']['value']
+    # convert to mile
+    distance = distance * 0.000621371
+    distances.append((space['_id'], distance))
 
-
-
-
-
-
-
-# geocode_result = gmaps.geocode('1600 Amphitheatre Parkway, Mountain View, CA')
-# print(geocode_result[0]['geometry']['location'])
-# for i in geocode_result[0]:
-#     print(i)
+distances = sorted(distances, key=lambda k: k[1])
