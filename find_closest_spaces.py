@@ -1,5 +1,4 @@
 from pymongo import MongoClient
-from flask import Flask
 from math import sin, cos, sqrt, atan2, radians
 import googlemaps
 
