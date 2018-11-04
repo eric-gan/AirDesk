@@ -6,10 +6,11 @@ import googlemaps
 gmaps = googlemaps.Client(key='AIzaSyB0mxT2fWkC1tsdGcxD5_rWpLxPsHoKEVQ')
 client = MongoClient('mongodb://eric:Cheesecaker1@cluster0-shard-00-00-f2g27.gcp.mongodb.net:27017,cluster0-shard-00-01-f2g27.gcp.mongodb.net:27017,cluster0-shard-00-02-f2g27.gcp.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true')
 
+
 def get_user_location(loc):
     """
     Get the user's requested location of a study space
-    
+
     param loc: The user's requested location
     type loc: str
 
@@ -19,6 +20,7 @@ def get_user_location(loc):
     geocode_result = gmaps.geocode(loc)
     location = geocode_result[0]['geometry']['location']
     return location
+
 
 def calc_distance(user_loc, space):
     """
@@ -41,7 +43,9 @@ def calc_distance(user_loc, space):
     distance = distance * 0.000621371
     return distance
 
-user_loc = get_user_location('1600 Amphitheatre Parkway, Mountain View, CA') # change me later
+
+user_loc = get_user_location(
+    '1600 Amphitheatre Parkway, Mountain View, CA')  # change me later
 
 # read database
 db = client.airdesk
