@@ -71,5 +71,5 @@ def find_closest(loc=None):
         distances.append((space, distance))
 
     distances = sorted(distances, key=lambda k: k[1])
-    spaces = [dumps(loc[0]) for loc in distances]
+    spaces = [loc[0] for loc in distances]
     return spaces

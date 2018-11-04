@@ -3,6 +3,7 @@ from flask import Flask, render_template, request #imports flask and flask CORS 
 from flask_cors import CORS #server)
 from find_closest_spaces import find_closest, get_user_location
 import json
+from bson.json_util import dumps
 # from find_closest_spaces import find_closest
 app = Flask(__name__) #initializes the app
 
@@ -17,7 +18,7 @@ def explore():  # pragma: no cover #this loads index.html as the primary web pag
 	loc = request.args.get('address', default = '', type = str)
 	dic = get_user_location(loc)
 	geocode = dic['lat'], dic['lng']
-	closest = find_closest(loc)
+	closest = dumps(find_closest(loc))
 	print(closest)
 	# jsonLoc = json.dumps(dic)
 	# if jsonLoc:
