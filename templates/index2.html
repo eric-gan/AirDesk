@@ -167,18 +167,24 @@
           vars[key] = value;
       });
       return vars;
-    var address = getUrlVars['address']
-    console.log(address['lat'])
-    console.log(address['lng'])
+    }
+    const address = getUrlVars['address']
+    console.log(address)
+    console.log('{{geocode[0]}}')
+    console.log('{{geocode[1]}}')
+    // var loc = '{{loc}}'
+    // <!-- console.log({{loc}}) -->
+    // console.log(lat)
+    // console.log(lng)
+    // console.log(address['lat'])
+    // console.log(address['lng'])
     function myMap() {
-      var lat 
-      var lng = 
-      var mapProp= {
-          center:new google.maps.LatLng(51.508742,-0.120850),
-          zoom:5,
+      var mapProp = {
+          center:new google.maps.LatLng('{{geocode[0]}}','{{geocode[1]}}'),
+          zoom:12,
       };
       var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
-    }
+    };
   </script>
 
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB0mxT2fWkC1tsdGcxD5_rWpLxPsHoKEVQ&callback=myMap"></script>

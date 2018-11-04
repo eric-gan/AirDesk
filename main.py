@@ -1,7 +1,9 @@
 
-from flask import Flask, render_template #imports flask and flask CORS (this allows us to make our
+from flask import Flask, render_template, request #imports flask and flask CORS (this allows us to make our
 from flask_cors import CORS #server)
-from find_closest_spaces import find_closest
+from find_closest_spaces import find_closest, get_user_location
+import json
+# from find_closest_spaces import find_closest
 app = Flask(__name__) #initializes the app
 
 CORS(app) #allows cross-origin sharing (meaning anyone can send requests to the app)
@@ -11,14 +13,27 @@ def index():  # pragma: no cover #this loads index.html as the primary web page
     return render_template('index.html')
 
 @app.route('/explore', methods=['GET'])
-def explore(queries=None):  # pragma: no cover #this loads index.html as the primary web page
-    return render_template('index2.html', queries=queries)
+def explore():  # pragma: no cover #this loads index.html as the primary web page
+	loc = request.args.get('address', default = '', type = str)
+	print(loc)
+	dic = get_user_location(loc)
+	geocode = dic['lat'], dic['lng']
+	# jsonLoc = json.dumps(dic)
+	# if jsonLoc:
+	# 	lat = jsonLoc['lat']
+	# 	lng = jsonLoc['lng']
+	# else:
+	# 	lat = 37.9
+	# 	lng = 122.3
+	return render_template('index2.html', geocode=geocode)
+	# return render_template('index2.html', loc=jsonLoc)
+	# return render_template('index2.html', lat=lat, lng=lng)
 
-@app.route('/search/', methods=['POST'])
-def search_requested():
-    search_input = request.form['search']
-    search_result = find_closest(search_input)
-    return results(queries=search_result)
+# @app.route('/search/', methods=['POST'])
+# def search_requested():
+#     search_input = request.form['search']
+#     search_result = find_closest(search_input)
+#     return results(queries=search_result)
 
 if __name__ == "__main__":
     app.run(debug=True)

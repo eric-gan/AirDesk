@@ -18,7 +18,11 @@ def get_user_location(loc):
     rtype: dict
     """
     geocode_result = gmaps.geocode(loc)
-    location = geocode_result[0]['geometry']['location']
+    if not geocode_result:
+        location = {'lat': 37.8715926, 'lng': -122.272747}
+    else:
+        location = geocode_result[0]['geometry']['location']
+    # print(location)
     return location
 
 
