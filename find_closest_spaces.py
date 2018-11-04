@@ -44,8 +44,10 @@ def calc_distance(user_loc, space):
     return distance
 
 
-def find_closest(loc):
+def find_closest(loc=None):
     print('loc')
+    if loc is None:
+        return
     user_loc = get_user_location(loc)  # change me later
 
     # read database

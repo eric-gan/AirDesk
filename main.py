@@ -19,6 +19,9 @@ def search_requested():
     search_input = request.form['search']
     search_result = find_closest(search_input)
     return results(queries=search_result)
+
+if __name__ == "__main__":
+    app.run(debug=True)
 # @app.route('/counter', methods=['GET']) #this creates a route called /counter that we can reference in the front end called /counter and makes it a get method
 # def get_counter(): #this function returns counter as a string
 #         global counter
