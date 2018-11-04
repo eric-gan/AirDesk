@@ -15,7 +15,6 @@ def index():  # pragma: no cover #this loads index.html as the primary web page
 @app.route('/explore', methods=['GET'])
 def explore():  # pragma: no cover #this loads index.html as the primary web page
 	loc = request.args.get('address', default = '', type = str)
-	print(loc)
 	dic = get_user_location(loc)
 	geocode = dic['lat'], dic['lng']
 	# jsonLoc = json.dumps(dic)
