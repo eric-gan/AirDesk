@@ -17,6 +17,8 @@ def get_user_location(loc):
     rval: The user's requested location in latitude, longitude
     rtype: dict
     """
+    if not loc:
+        return {'lat': 37.8715926, 'lng': -122.272747}
     geocode_result = gmaps.geocode(loc)
     if not geocode_result:
         location = {'lat': 37.8715926, 'lng': -122.272747}
@@ -49,9 +51,9 @@ def calc_distance(user_loc, space):
 
 
 def find_closest(loc=None):
-    print('loc')
-    if loc is None:
-        return
+    # print('loc')
+    # if loc is None:
+    #     return
     user_loc = get_user_location(loc)  # change me later
 
     # read database
