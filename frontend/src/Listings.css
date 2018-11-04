@@ -19,12 +19,18 @@
 
 .ListingContent {
 	width: 350px;
-	outline: 0.5px solid black;
+	/* outline: 0.5px solid black;  */
 }
 
 .ListingContentType {
-	font-size: 14px;
-	color: red;
+	    font-family: Circular,
+	    "Helvetica Neue",
+	    Helvetica,
+	    Arial,
+	    sans-serif;
+	    font-size: 14px;
+	    line-height: 1.43;
+	    color: #484848;
 }
 
 .ListingContentTitle {
@@ -34,5 +40,5 @@
 
 .ListingPrice {
 	width: 150px;
-	outline: 0.5px solid black;
+	/* outline: 0.5px solid black; */
 }

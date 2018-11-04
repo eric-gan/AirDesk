@@ -13,9 +13,7 @@ class Listings extends Component {
           <h2 className="ListingContentType">
             George's cozy den Perfect for studying!
           </h2>
-          <h1 className="ListingContentTitle">
-            Large private bedroom
-          </h1>
+          
           <p>Amenities here!</p>
         </div>
         <div className="ListingPrice">
