@@ -5,7 +5,7 @@ import googlemaps
 
 # setup
 gmaps = googlemaps.Client(key='AIzaSyB0mxT2fWkC1tsdGcxD5_rWpLxPsHoKEVQ')
-client = MongoClient('localhost', 27107)
+client = MongoClient('mongodb://eric:Cheesecaker1@cluster0-shard-00-00-f2g27.gcp.mongodb.net:27017,cluster0-shard-00-01-f2g27.gcp.mongodb.net:27017,cluster0-shard-00-02-f2g27.gcp.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true')
 
 def get_user_location(loc):
     """
@@ -48,14 +48,17 @@ def lat_lon_dist(lat1, lat2, lon1, lon2):
     distance = R * c
     return distance
 
+user_loc = get_user_location('1600 Amphitheatre Parkway, Mountain View, CA') # change me later
 
 db = client.airdesk
 collection = db.listings
 listings = collection.find()
+
 locations = []
 for space in listings:
     geocode_result = gmaps.geocode(space['_location'])
     locations.append(geocode_result[0]['geometry']['location'])
+
 
 
 
