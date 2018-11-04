@@ -1,0 +1,56 @@
+<html>
+  <head>
+    <script src="https://s3.amazonaws.com/stitch-sdks/js/bundles/4.0.8/stitch.js"></script>
+    <script>
+      const client = stitch.Stitch.initializeDefaultAppClient('airdesk-app-qomqb');
+
+      const db = client.getServiceClient(stitch.RemoteMongoClient.factory, 'mongodb-atlas').db('airdesk');
+
+      // client.auth.loginWithCredential(new stitch.AnonymousCredential()).then(user => 
+      //   db.collection('listings').updateOne({owner_id: client.auth.user.id}, {$set:{number:42}}, {upsert:true})
+      // ).then(() => 
+      //   db.collection('listings').find({owner_id: client.auth.user.id}, { limit: 100}).asArray()
+      // ).then(docs => {
+      //     console.log("Found docs", docs)
+      //     console.log("[MongoDB Stitch] Connected to Stitch")
+      // }).catch(err => {
+      //   console.error(err)
+      // });
+
+      function displayListings() {
+        db.collection("listings")
+          .find({}, { limit: 1000 })
+          .asArray()
+          .then(docs => docs.map(doc => `<div>${doc._name}</div>`))
+          .then(listings => document.getElementById("listings").innerHTML = listings)
+      }
+      function displayListingsOnLoad() {
+        client.auth
+          .loginWithCredential(new stitch.AnonymousCredential())
+          .then(displayListings)
+          .catch(console.error);
+      }
+
+      function addListing() {
+        const newListing = document.getElementById("new_listing");
+        console.log("add listing", client.auth.user.id)
+        db.collection("listings")
+          .insertOne({ owner_id: client.auth.user.id, listing: newListing.value })
+          .then(displayListings);
+        newListing.value = "";
+      }
+  </script>
+  </head>
+
+  <body onLoad="displayListingsOnLoad()">
+    <h3>This is a great blog post</h3>
+    <div id="content">
+      I like to write about technology because I want to get on the front page of hacker news.
+    </div>
+    <hr>
+    <div id="listings"></div>
+    <hr>
+    Add a Listing: <input id="new_listing"><input type="submit" onClick="addListing()">
+  </body>
+
+</html>

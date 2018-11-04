@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
 import './App.css';
+import Heading from './Heading';
 import AllListings from './AllListings';
-
-import SearchBar from './SearchBar';
 
 class App extends Component {
 
   render() {
     return (
       <div className="App">
-        <SearchBar />
+        <Heading/>
         <AllListings
         />
       </div>

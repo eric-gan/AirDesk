@@ -7,7 +7,7 @@ class AllListings extends Component {
     const properties = [1,2,3];
     // const { properties } = this.props;
     return (
-      <div>
+      <div className="AllListings">
         {
           properties.map(property => {
             return ( 
