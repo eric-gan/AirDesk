@@ -27,7 +27,6 @@ def get_user_location(loc):
         location = {'lat': 37.8715926, 'lng': -122.272747}
     else:
         location = geocode_result[0]['geometry']['location']
-    # print(location)
     return location
 
 
@@ -54,9 +53,6 @@ def calc_distance(user_loc, space):
 
 
 def find_closest(loc=None):
-    # print('loc')
-    # if loc is None:
-    #     return
     user_loc = get_user_location(loc)  # change me later
 
     # read database
