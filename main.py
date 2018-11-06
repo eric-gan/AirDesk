@@ -4,6 +4,7 @@ from flask_cors import CORS #server)
 from find_closest_spaces import find_closest, get_user_location
 import json
 from bson.json_util import dumps
+from googlemaps import Client
 # from find_closest_spaces import find_closest
 app = Flask(__name__) #initializes the app
 
